@@ -2,12 +2,14 @@ const searchInput = document.getElementById('searchInput');
 const apiKey = "AIzaSyCtP8ImeeO-q-8MiQEatzzJmy9fysuanNw";
 localStorage.setItem("api_key" , apiKey);
 const container = document.getElementById("container");
+
+//-----------------------------------------------------------------------------------------------------------------------------------||
 function searchVideos(){
     let searchValue = searchInput.value;
 
     fetchVideos(searchValue);
 }
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 async function fetchVideos(searchValue){
     let endpoint = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchValue}&maxResults=16&key=${apiKey}`
     
@@ -27,7 +29,7 @@ async function fetchVideos(searchValue){
         console.log(error);
     }
 }
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 function showThumbnails(items){
     for(let x=0;x<items.length;x++){
         let videoItem = items[x];
@@ -48,7 +50,7 @@ function showThumbnails(items){
         container.append(videoElement);
     }
 }
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 async function fetchStats(videoId){
   const endpoint = `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${apiKey}`;
 
@@ -56,7 +58,7 @@ async function fetchStats(videoId){
     let result = response.json();
     return result;
 }
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 function getViews(n){
     if(n<1000) return n;
     else if(n>=1000 && n<=999999){
@@ -66,13 +68,13 @@ function getViews(n){
     }
     return parseInt(n / 1000000) + "M";
 }
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 function dateFunc(str){
     str = str.slice(0,10).split("-").reverse().join("-");
     return str;
 }
 
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 function formattedData(duration) {
     if(!duration) return "NA" ;
     // PT2H33M23S
@@ -87,7 +89,7 @@ function formattedData(duration) {
     return str ;
 }
 
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 
 
 
@@ -104,3 +106,4 @@ function navigateToVideo(videoId){
         alert("Go and watch video in youtube");
     }
 }
+//-----------------------------------------------------------------------------------------------------------------------------------||

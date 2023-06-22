@@ -1,11 +1,11 @@
 let cookieString = document.cookie;
 let videoId = cookieString.split("=")[1];
 const apiKey = localStorage.getItem("api_key");
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 let firstScript = document.getElementsByTagName("script")[0];
 firstScript.addEventListener("load" , onLoadScript);
 const statsContainer = document.getElementsByClassName("video-details")[0];
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 function onLoadScript(){
 
     if(YT){
@@ -14,7 +14,7 @@ function onLoadScript(){
             width:"800",
             videoId,
             events:{
-                onReady: () =>{
+                onReady: (event) =>{
                     document.title = event.target.videoTitle ;
                     extractVideoDetails(videoId);
                     fetchStats(videoId)
@@ -23,7 +23,7 @@ function onLoadScript(){
         })
     }
 }
-    
+ //-----------------------------------------------------------------------------------------------------------------------------------||   
 async function extractVideoDetails(videoId){
     let endpoint = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&id=${videoId}&maxResults=16&key=${apiKey}`;
 
@@ -36,7 +36,7 @@ async function extractVideoDetails(videoId){
         console.log(error);
     }
 }
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 async function  fetchStats(videoId){
     console.log("Inside fetchStats")
     let endpoint = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&key=${apiKey}&id=${videoId}`;
@@ -86,7 +86,7 @@ async function  fetchStats(videoId){
 }
 
 
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 function renderComments(commentsList) {
     const commentsContainer = document.getElementById("comments-container"); 
     // commentsContainer.
@@ -120,7 +120,7 @@ function renderComments(commentsList) {
 
     }
 }
-
+//-----------------------------------------------------------------------------------------------------------------------------------||
 async function loadComments(element){
     const commentId = element.getAttribute("data-comment-id");
     console.log(commentId)
@@ -158,3 +158,4 @@ async function loadComments(element){
 
     }
 }
+//-----------------------------------------------------------------------------------------------------------------------------------||
